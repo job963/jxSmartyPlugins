@@ -8,9 +8,6 @@
 
 ## How to Use
 
-1. ...
+### [{ jxalertbox msg="..." type="..." }]
 
-2. ...
-
-3. ...
-
+### [{ jxmodaldialog button="..." title="..." body="..." close="true" footerbutton="..." }]
