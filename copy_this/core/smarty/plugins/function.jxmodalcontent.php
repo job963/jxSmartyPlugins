@@ -24,7 +24,7 @@
  * Smarty Modal Dialog function
  * -------------------------------------------------------------
  * Purpose: displays an alert box
- * add [{ jxmodaldialog button="..." title="..." body="..." close="true|false" footerbutton="..." }] where you want to display content
+ * add [{ jxmodalcontent button="..." title="..." ident="..." close="true|false" footerbutton="..." }] where you want to display content
  * -------------------------------------------------------------
  *
  * @param array  $aParams  parameters to process
@@ -32,9 +32,15 @@
  *
  * @return string
  */
-function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
+function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
 {
-    $sReturn = '';
+    $myConfig = oxRegistry::getConfig();
+    $sReturn = $myConfig->getActiveShop()->oxshops__oxproductive->value ? null : "<b>content not found ! check ident(".$aParams['ident'].") !</b>";
+    $oSmarty->oxidcache = new oxField($sReturn, oxField::T_RAW);
+
+    $sIdent = isset( $aParams['ident'] )?$aParams['ident']:null;
+    $sOxid  = isset( $aParams['oxid'] )?$aParams['oxid']:null;
+    //$sReturn = '';
     $oConfig = oxRegistry::getConfig();
         
     if ($oConfig->getConfigParam('blJxSmartyLoadBsStylesheet')) {
@@ -46,40 +52,64 @@ function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
     if ($oConfig->getConfigParam('blJxSmartyLoadBsJavascript')) {
         $sReturn .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>';
     }
-	
+
     if ($aParams['button']) {
         $sReturn .= '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">' . $aParams['button'] . '</button>';
     }
-
-    $sReturn .= '<div class="modal fade" id="myModal" role="dialog">';
-    $sReturn .= '<div class="modal-dialog">';
-
-    if ($aParams['body']) {
-        $sReturn .= '<div class="modal-content">';
-        if ($aParams['title']) {
-            $sReturn .= '<div class="modal-header">';
-            if ($aParams['close']) {
-                $sReturn .= '<button type="button" class="close" data-dismiss="modal">×</button>';
-            }
-            $sReturn .= '<h4 class="modal-title">' . $aParams['button'];
-            $sReturn .= '</div>';
+	
+    if ( $sIdent || $sOxid ) {
+        $oContent = oxNew( "oxcontent" );
+        if ( $sOxid ) {
+            $blLoaded = $oContent->load( $sOxid );
+        } else {
+            $blLoaded = $oContent->loadbyIdent( $sIdent );
         }
-        $sReturn .= '<div class="modal-body">';
-        $sReturn .= '<p>' . $aParams['body'] . '</p>';
-        $sReturn .= '</div>';
-        if ($aParams['footerbutton']) {
+
+        if ( $blLoaded && $oContent->oxcontents__oxactive->value ) {
+            // set value
+            $sField = "oxcontent";
+            if ( $aParams['field'] ) {
+                $sField = $aParams['field'];
+            }
+            // set value
+            $sProp = 'oxcontents__'.$sField;
+            $oSmarty->oxidcache = clone $oContent->$sProp;
+            $oSmarty->compile_check  = true;
+            $sCacheId = oxRegistry::getLang()->getBaseLanguage() . $myConfig->getShopId();
+			
+            $sReturn .= '<div class="modal fade" id="myModal" role="dialog">';
+            $sReturn .= '<div class="modal-dialog">';
+
+            $sReturn .= '<div class="modal-content">';
+            if ($aParams['title']) {
+                $sReturn .= '<div class="modal-header">';
+                if ($aParams['close']) {
+                    $sReturn .= '<button type="button" class="close" data-dismiss="modal">×</button>';
+                }
+                $sReturn .= '<h4 class="modal-title">' . $aParams['button'];
+                $sReturn .= '</div>';
+            }
+
+            $sReturn .= '<div class="modal-body">';
+            $sReturn .= '<p>' . $oSmarty->fetch( "ox:".(string)$sIdent.(string)$sOxid.$sField.$sCacheId) . '</p>';
+            $sReturn .= '</div>';
+
             $sReturn .= '<div class="modal-footer">';
             $sReturn .= '<button type="button" class="btn btn-default" data-dismiss="modal">' . $aParams['footerbutton'] . '</button>';
             $sReturn .= '</div>';
+            $sReturn .= '</div>';
+            $sReturn .= '</div>';
+            $sReturn .= '</div>';
+			
+            $oSmarty->compile_check  = $myConfig->getConfigParam( 'blCheckTemplates' );
         }
-        $sReturn .= '</div>';
     }
 
-    $sReturn .= '</div>';
-    $sReturn .= '</div>';
-	
-    return $sReturn;
+    // if we write '[{oxcontent ident="oxemailfooterplain" assign="fs_text"}]' the content wont be outputted.
+    // instead of this the content will be assigned to variable.
+    if( isset( $aParams['assign']) && $aParams['assign'])
+        $oSmarty->assign($aParams['assign'], $sReturn);
+    else
+        return $sReturn;
+
 }
-
-
-?>

@@ -34,24 +34,40 @@
  */
 function smarty_function_jxalertbox( $aParams, &$oSmarty )
 {
-	switch ($aParams['type']) {
-		case 'success':
-			$sHeader = '<div style="color:#3c763d; background-color:#dff0d8; padding:15px; border:1px solid #d6e9c6; border-radius:3px;">';
-			break;
-		case 'info':
-			$sHeader = '<div style="color:#31708f; background-color:#d9edf7; padding:15px; border:1px solid #bce8f1; border-radius:3px;">';
-			break;
-		case 'warning':
-			$sHeader = '<div style="color:#8a6d3b; background-color:#fcf8e3; padding:15px; border:1px solid #faebcc; border-radius:3px;">';
-			break;
-		case 'danger':
-			$sHeader = '<div style="color:#a94442; background-color:#f2dede; padding:15px; border:1px solid #ebccd1; border-radius:3px;">';
-			break;
-		default:
-			break;
-	}
-	$sFooter = '</div>';
-    return $sHeader . $aParams['msg'] . $sFooter;
+    $sReturn = '';
+    $oConfig = oxRegistry::getConfig();
+
+    if ($oConfig->getConfigParam('blJxSmartyLoadBsStylesheet')) {
+        $sReturn .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">';
+    }
+    if ($oConfig->getConfigParam('blJxSmartyLoadBsTheme')) {
+        $sReturn .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">';
+    }
+    if ($oConfig->getConfigParam('blJxSmartyLoadBsJavascript')) {
+        $sReturn .= '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>';
+    }
+    
+    switch ($aParams['type']) {
+        case 'success':
+            $sReturn .= '<div class="alert alert-success">';
+            break;
+        case 'info':
+            $sReturn .= '<div class="alert alert-info">';
+            break;
+        case 'warning':
+            $sReturn .= '<div class="alert alert-warning">';
+            break;
+        case 'danger':
+            $sReturn .= '<div class="alert alert-danger">';
+            break;
+        default:
+            $sReturn .= '<div class="alert alert-info">';
+            break;
+    }
+    $sReturn .= $aParams['msg'];
+    $sReturn .= '</div>';
+        
+    return $sReturn;
 }
 
 
