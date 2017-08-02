@@ -23,7 +23,7 @@
 /**
  * Smarty Modal Dialog function
  * -------------------------------------------------------------
- * Purpose: displays an alert box
+ * Purpose: Displays a CMS page in a modal dialog
  * add [{ jxmodalcontent button="..." title="..." ident="..." close="true|false" footerbutton="..." }] where you want to display content
  * -------------------------------------------------------------
  *
@@ -66,6 +66,30 @@ function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
         }
 
         if ( $blLoaded && $oContent->oxcontents__oxactive->value ) {
+            $sReturn .= '<div class="modal fade" id="myModal" role="dialog">';
+            $sReturn .= '<div class="modal-dialog">';
+
+            $sReturn .= '<div class="modal-content">';
+            if ($aParams['title']) {
+                
+                // set value
+                $sField = "oxtitle";
+                /* **if ( $aParams['field'] ) {
+                    $sField = $aParams['field'];
+                }** */
+                // set value
+                $sProp = 'oxcontents__'.$sField;
+                $oSmarty->oxidcache = clone $oContent->$sProp;
+                $oSmarty->compile_check  = true;
+                $sCacheId = oxRegistry::getLang()->getBaseLanguage() . $myConfig->getShopId();
+			
+                $sReturn .= '<div class="modal-header">';
+                if ($aParams['close']) {
+                    $sReturn .= '<button type="button" class="close" data-dismiss="modal">×</button>';
+                }
+                $sReturn .= '<h4 class="modal-title">' . $oSmarty->fetch( "ox:".(string)$sIdent.(string)$sOxid.$sField.$sCacheId) . '</div>';
+            }
+
             // set value
             $sField = "oxcontent";
             if ( $aParams['field'] ) {
@@ -77,19 +101,6 @@ function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
             $oSmarty->compile_check  = true;
             $sCacheId = oxRegistry::getLang()->getBaseLanguage() . $myConfig->getShopId();
 			
-            $sReturn .= '<div class="modal fade" id="myModal" role="dialog">';
-            $sReturn .= '<div class="modal-dialog">';
-
-            $sReturn .= '<div class="modal-content">';
-            if ($aParams['title']) {
-                $sReturn .= '<div class="modal-header">';
-                if ($aParams['close']) {
-                    $sReturn .= '<button type="button" class="close" data-dismiss="modal">×</button>';
-                }
-                $sReturn .= '<h4 class="modal-title">' . $aParams['button'];
-                $sReturn .= '</div>';
-            }
-
             $sReturn .= '<div class="modal-body">';
             $sReturn .= '<p>' . $oSmarty->fetch( "ox:".(string)$sIdent.(string)$sOxid.$sField.$sCacheId) . '</p>';
             $sReturn .= '</div>';

@@ -21,10 +21,10 @@
  */
 
 /**
- * Smarty Modal Dialog function
+ * Smarty Modal PDF function
  * -------------------------------------------------------------
- * Purpose: Displays a text in a modal dialog
- * add [{ jxmodaldialog button="..." title="..." body="..." close="true|false" footerbutton="..." }] where you want to display content
+ * Purpose: Displays a PDF file in a modal dialog
+ * add [{ jxmodalpdf button="..." title="..." pdf="..." close="true|false" footerbutton="..." }] where you want to display content
  * -------------------------------------------------------------
  *
  * @param array  $aParams  parameters to process
@@ -32,7 +32,7 @@
  *
  * @return string
  */
-function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
+function smarty_function_jxmodalpdf( $aParams, &$oSmarty )
 {
     $sReturn = '';
     $oConfig = oxRegistry::getConfig();
@@ -52,9 +52,9 @@ function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
     }
 
     $sReturn .= '<div class="modal fade" id="myModal" role="dialog">';
-    $sReturn .= '<div class="modal-dialog">';
+    $sReturn .= '<div class="modal-dialog modal-lg" role="document">';
 
-    if ($aParams['body']) {
+    if ($aParams['file']) {
         $sReturn .= '<div class="modal-content">';
         if ($aParams['title']) {
             $sReturn .= '<div class="modal-header">';
@@ -64,8 +64,12 @@ function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
             $sReturn .= '<h4 class="modal-title">' . $aParams['button'];
             $sReturn .= '</div>';
         }
-        $sReturn .= '<div class="modal-body">';
-        $sReturn .= '<p>' . $aParams['body'] . '</p>';
+        $sReturn .= '<div class="modal-body" style="max-height: calc(100vh - 200px);">';
+        $sReturn .= '<object data="' . $aParams['file'] . '" type="application/pdf" style="width:100%;height:500px;"';
+        $sReturn .= '<embed src="' . $aParams['file'] . '">';
+        $sReturn .= '<p>This browser does not support PDFs. Please download the PDF to view it: <a href="' . $aParams['file'] . '">' . $aParams['file'] . '</a>.</p>';
+        $sReturn .= '</embed>';
+        $sReturn .= '</object>';
         $sReturn .= '</div>';
         if ($aParams['footerbutton']) {
             $sReturn .= '<div class="modal-footer">';
