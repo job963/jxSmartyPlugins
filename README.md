@@ -21,7 +21,7 @@ _type_ - Display type (color). Possible values are _success_, _info_, _warning_ 
 [{jxalertbox msg="<b>Warning</b><br />That's a warning message" type="warning"}]
 [{jxalertbox msg="<b>Danger</b><br />Use this alertbox for dangerous steps" type="danger"]
 ```
-(https://github.com/job963/jxSmartyPlugins/docu/jxalertbox.png)
+(https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxalertbox.png)
 
 ### [{ jxmodaldialog button="..." title="..." body="..." close="true" footerbutton="..." }]
 
@@ -36,7 +36,7 @@ _footerbutton_ - Label text of the close button in the footer section
 ```
 [{ jxmodaldialog button="More Info" title="Info about" body="This is the info text" close="true" footerbutton="Close" }]
 ```
-(https://github.com/job963/jxSmartyPlugins/docu/jxmodaldialog.png)
+(https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxmodaldialog.png)
 
 ### [{ jxmodalcontent button="..." ident="..." close="true" footerbutton="..." }]
 
@@ -50,7 +50,7 @@ _footerbutton_ - Label text of the close button in the footer section
 ```
 [{ jxmodalcontent button="More Info" ident="oxdeliveryinfo" close="false" footerbutton="Close" }]
 ```
-(https://github.com/job963/jxSmartyPlugins/docu/jxmodalcontent.png)
+(https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxmodalcontent.png)
 
 ### [{ jxmodalpdf button="..." title="..." file="..." close="true" footerbutton="..." }]
 
@@ -65,4 +65,4 @@ _footerbutton_ - Label text of the close button in the footer section
 ```
 [{ jxmodalpdf button="Show PDF" file="/out/info.pdf" close="false" footerbutton="Close" }]
 ```
-(https://github.com/job963/jxSmartyPlugins/docu/jxmodalpdf.png)
+(https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxmodalpdf.png)
