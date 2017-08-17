@@ -35,20 +35,38 @@ $aModule = array(
                         ),
     'settings'     => array(
                         array(
-                            'group' => 'JXSMARTY_INCLUDE', 
+                            'group' => 'JXSMARTY_BSINCLUDE', 
                             'name'  => 'blJxSmartyLoadBsStylesheet', 
                             'type'  => 'bool', 
                             'value' => 'false'
                             ),
                         array(
-                            'group' => 'JXSMARTY_INCLUDE', 
+                            'group' => 'JXSMARTY_BSINCLUDE', 
                             'name'  => 'blJxSmartyLoadBsTheme', 
                             'type'  => 'bool', 
                             'value' => 'false'
                             ),
                         array(
-                            'group' => 'JXSMARTY_INCLUDE', 
+                            'group' => 'JXSMARTY_BSINCLUDE', 
                             'name'  => 'blJxSmartyLoadBsJavascript', 
+                            'type'  => 'bool', 
+                            'value' => 'false'
+                            ),
+                        array(
+                            'group' => 'JXSMARTY_PPINCLUDE', 
+                            'name'  => 'blJxSmartyLoadJQuery', 
+                            'type'  => 'bool', 
+                            'value' => 'false'
+                            ),
+                        array(
+                            'group' => 'JXSMARTY_PPINCLUDE', 
+                            'name'  => 'blJxSmartyLoadPpStylesheet', 
+                            'type'  => 'bool', 
+                            'value' => 'false'
+                            ),
+                        array(
+                            'group' => 'JXSMARTY_PPINCLUDE', 
+                            'name'  => 'blJxSmartyLoadPpJavascript', 
                             'type'  => 'bool', 
                             'value' => 'false'
                             ),
