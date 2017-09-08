@@ -24,7 +24,7 @@
  * Smarty Modal Dialog function
  * -------------------------------------------------------------
  * Purpose: Displays a text in a modal dialog
- * add [{ jxmodaldialog button="..." title="..." body="..." close="true|false" footerbutton="..." }] where you want to display content
+ * add [{ jxmodaldialog button="..." title="..." body="..." close="true|false" footerbutton="..." delay="..." timeout="..." }] where you want to display content
  * -------------------------------------------------------------
  *
  * @param array  $aParams  parameters to process
@@ -48,10 +48,10 @@ function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
     }
 	
     if ($aParams['button']) {
-        $sReturn .= '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">' . $aParams['button'] . '</button>';
+        $sReturn .= '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#jxModal">' . $aParams['button'] . '</button>';
     }
 
-    $sReturn .= '<div class="modal fade" id="myModal" role="dialog">';
+    $sReturn .= '<div class="modal fade" id="jxModal" role="dialog">';
     $sReturn .= '<div class="modal-dialog">';
 
     if ($aParams['body']) {
@@ -61,7 +61,7 @@ function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
             if ($aParams['close']) {
                 $sReturn .= '<button type="button" class="close" data-dismiss="modal">×</button>';
             }
-            $sReturn .= '<h4 class="modal-title">' . $aParams['button'];
+            $sReturn .= '<h4 class="modal-title">' . $aParams['title'];
             $sReturn .= '</div>';
         }
         $sReturn .= '<div class="modal-body">';
@@ -77,6 +77,33 @@ function smarty_function_jxmodaldialog( $aParams, &$oSmarty )
 
     $sReturn .= '</div>';
     $sReturn .= '</div>';
+	
+    if ($aParams['delay']) {
+        /*$sReturn .= '<script type="text/javascript">'
+                    . '$(window).load(function(){ '
+                        . 'window.setTimeout(function(){ '
+                            . '$("#jxModal").modal("show"); '
+                        . '}, ' . $aParams['delay'] . '); '
+                    . '});'
+                . '</script>';/**/
+        
+        // Hide modal after 'timeout' time
+        $sHideAfter = '';
+        if ($aParams['timeout']) {
+           $sHideAfter = 'setTimeout(function(){'
+                           . '$("#jxModal").modal("hide");'
+                       . '},' . $aParams['timeout'] . ');';
+        }
+        // Show modal after 'delay' time
+        $sReturn .= '<script type="text/javascript">'
+                    . 'window.onload = function(){'
+                        . 'setTimeout(function(){'
+                            . '$("#jxModal").modal("show");'
+                            . $sHideAfter
+                        . '},' . $aParams['delay'] . ');'
+                    . '} '
+                . '</script>';/**/
+    }
 	
     return $sReturn;
 }

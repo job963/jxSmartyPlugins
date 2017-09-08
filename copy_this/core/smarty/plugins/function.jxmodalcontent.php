@@ -24,7 +24,7 @@
  * Smarty Modal Dialog function
  * -------------------------------------------------------------
  * Purpose: Displays a CMS page in a modal dialog
- * add [{ jxmodalcontent button="..." title="..." ident="..." close="true|false" footerbutton="..." }] where you want to display content
+ * add [{ jxmodalcontent button="..." title="..." ident="..." close="true|false" footerbutton="..." delay="..." timeout="..." }] where you want to display content
  * -------------------------------------------------------------
  *
  * @param array  $aParams  parameters to process
@@ -111,6 +111,26 @@ function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
             $sReturn .= '</div>';
             $sReturn .= '</div>';
             $sReturn .= '</div>';
+	
+            if ($aParams['delay']) {
+
+                // Hide modal after 'timeout' time
+                $sHideAfter = '';
+                if ($aParams['timeout']) {
+                   $sHideAfter = 'setTimeout(function(){'
+                                   . '$("#jxModal").modal("hide");'
+                               . '},' . $aParams['timeout'] . ');';
+                }
+                // Show modal after 'delay' time
+                $sReturn .= '<script type="text/javascript">'
+                            . 'window.onload = function(){'
+                                . 'setTimeout(function(){'
+                                    . '$("#jxModal").modal("show");'
+                                    . $sHideAfter
+                                . '},' . $aParams['delay'] . ');'
+                            . '} '
+                        . '</script>';/**/
+            }
 			
             $oSmarty->compile_check  = $myConfig->getConfigParam( 'blCheckTemplates' );
         }

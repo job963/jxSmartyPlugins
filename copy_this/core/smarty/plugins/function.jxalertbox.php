@@ -24,7 +24,7 @@
  * Smarty Alert function
  * -------------------------------------------------------------
  * Purpose: displays an alert box
- * add [{ jxalertbox msg="..." type="..." }] where you want to display content
+ * add [{ jxalertbox msg="..." type="..." timeout="..." }] where you want to display an alert
  * -------------------------------------------------------------
  *
  * @param array  $aParams  parameters to process
@@ -66,6 +66,18 @@ function smarty_function_jxalertbox( $aParams, &$oSmarty )
     }
     $sReturn .= $aParams['msg'];
     $sReturn .= '</div>';
+    
+    // Hide alert after 'timeout' time
+    if ($aParams['timeout']) {
+        $sReturn .= '<script type="text/javascript">'
+            . 'window.onload = function(){'
+                . 'setTimeout(function(){'
+                    . '$(".alert").slideUp(500);'
+                . '},' . $aParams['timeout'] . ');'
+            . '} '
+        . '</script>';/**/
+
+    }
         
     return $sReturn;
 }

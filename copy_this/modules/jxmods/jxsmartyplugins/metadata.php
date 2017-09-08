@@ -11,17 +11,18 @@ $sMetadataVersion = '1.1';
  * @link      https://github.com/job963/jxSmartyPlugins
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  * @copyright (C) Joachim Barthel 2017
+ * @author    Joachim Barthel <jobarthel@gmail.com>
  * 
  */
 $aModule = array(
     'id'           => 'jxSmartyPlugins',
     'title'        => 'jxSmartyPlugins - Smarty Extensions',
     'description'  => array(
-                        'de' => 'Erweiterung der Smarty Funktionalität.',
-                        'en' => 'Updating the products by CSV imports.'
+                        'de' => 'Bootstrap Elemente als Erweiterung der Smarty Funktionalität.',
+                        'en' => 'Bootstrap Elements as Extension of Smarty.'
                         ),
     'thumbnail'    => 'jxsmartyplugins.png',
-    'version'      => '0.1.0',
+    'version'      => '0.2.0',
     'author'       => 'Joachim Barthel',
     'url'          => 'https://github.com/job963/jxSmartyPlugins',
     'email'        => 'jobarthel@gmail.com',
