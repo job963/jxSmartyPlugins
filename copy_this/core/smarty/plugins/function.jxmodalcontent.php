@@ -35,7 +35,7 @@
 function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
 {
     $myConfig = oxRegistry::getConfig();
-    $sReturn = $myConfig->getActiveShop()->oxshops__oxproductive->value ? null : "<b>content not found ! check ident(".$aParams['ident'].") !</b>";
+    $sReturn = '';  //$myConfig->getActiveShop()->oxshops__oxproductive->value ? null : "<b>content not found ! check ident(".$aParams['ident'].") !</b>";
     $oSmarty->oxidcache = new oxField($sReturn, oxField::T_RAW);
 
     $sIdent = isset( $aParams['ident'] )?$aParams['ident']:null;
@@ -71,7 +71,6 @@ function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
 
             $sReturn .= '<div class="modal-content">';
             if ($aParams['title']) {
-                
                 // set value
                 $sField = "oxtitle";
                 /* **if ( $aParams['field'] ) {
@@ -133,6 +132,9 @@ function smarty_function_jxmodalcontent( $aParams, &$oSmarty )
             }
 			
             $oSmarty->compile_check  = $myConfig->getConfigParam( 'blCheckTemplates' );
+        }
+        else {
+            $sReturn = "<b>content not found ! check ident(".$aParams['ident'].") !</b>";
         }
     }
 
