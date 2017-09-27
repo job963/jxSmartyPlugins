@@ -26,9 +26,7 @@
  * -------------------------------------------------------------
  * Purpose: displays an font awesome character / symbol
  * add 
- *   [{ jxfa icon="..." color="..." size="lg|2x|3x|4x|5x" width="fw" rot="90|180|270" flip="hot|vert" }]
- *   [{ jxfa spin="spinner|circle|refresh|cog|pulse" color="..." size="lg|2x|3x|4x|5x" width="fw" }]
- *   [{ jxfa pull="true|false" icon="..." color="..." align="left|right" border="true|false" }]
+ *   [{ jxfastack inner="..." outer="..." innercolor="..." outercolor="..." inverse="true|false" order="reverse" rot="90|180|270" flip="hot|vert" }]
  * where you want to display an font awesome icon
  * -------------------------------------------------------------
  *
@@ -37,7 +35,7 @@
  *
  * @return string
  */
-function smarty_function_jxfa( $aParams, &$oSmarty )
+function smarty_function_jxfastack( $aParams, &$oSmarty )
 {
     $sReturn = '';
     $oConfig = oxRegistry::getConfig();
@@ -46,19 +44,68 @@ function smarty_function_jxfa( $aParams, &$oSmarty )
         $sReturn .= '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">';
     }*/
     
-    $sReturn = '<i class="fa';
+    $sReturn = '<span class="fa-stack fa-lg">';
     
-    if ($aParams['icon'] != '') {
-        $sReturn .= ' fa-' . $aParams['icon'];
+    $aIcons = array('inner' => '', 'outer' => '');
+    
+    foreach ($aIcons as $sIcon => $sValue) {
+        $aIcons[$sIcon] .= '<i class="fa';
+        
+        $sParamName = $sIcon . 'icon';
+        if ($aParams[$sParamName] != '') {
+            $aIcons[$sIcon] .= ' fa-' . $aParams[$sParamName];
+        }
+        
+        if ($sIcon == 'outer') {
+            $aIcons[$sIcon] .= ' fa-stack-2x';
+        }
+        else {
+            $aIcons[$sIcon] .= ' fa-stack-1x';
+        }
+        
+        if ($sIcon == 'inner') {
+            if ($aParams['inverse'] == 'true') {
+                $aIcons[$sIcon] .= ' fa-inverse';
+            }
+            
+            if ($aParams['rot'] != '') {
+                $aIcons[$sIcon] .= ' fa-rotate';
+                switch ($aParams['rot']) {
+                    case '90':
+                        $aIcons[$sIcon] .= '-90';
+                        break;
+                    case '180':
+                        $aIcons[$sIcon] .= '-180';
+                        break;
+                    case '270':
+                        $aIcons[$sIcon] .= '-90';
+                        break;
+                    default:
+                        $aIcons[$sIcon] .= '-90';
+                        break;
+                }
+            }
+            
+            if ($aParams['spin'] == 'true') {
+                $aIcons[$sIcon] .= ' fa-spin';
+            }
+        }
+
+        $aIcons[$sIcon] .= '"';
+
+        $sParamName = $sIcon . 'color';
+        if ($aParams[$sParamName] != '') {
+            $aIcons[$sIcon] .= ' style="color:' . $aParams[$sParamName] .'"';
+        }
+
+        $aIcons[$sIcon] .= '></i>';
     }
     
-    if ($aParams['size'] != '') {
-        $sReturn .= ' fa-' . $aParams['size'];
-    }
     
-    if ($aParams['width'] != '') {
-        $sReturn .= ' fa-' . $aParams['width'];
-    }
+    // outer fa icon
+    $sOuter = '<i class="fa';
+    
+    /*
     
     if ($aParams['spin'] != '') {
         switch ($aParams['spin']) {
@@ -83,24 +130,6 @@ function smarty_function_jxfa( $aParams, &$oSmarty )
         }
     }
     
-    if ($aParams['rot'] != '') {
-        $sReturn .= ' fa-rotate';
-        switch ($aParams['rot']) {
-            case '90':
-                $sReturn .= '-90';
-                break;
-            case '180':
-                $sReturn .= '-180';
-                break;
-            case '270':
-                $sReturn .= '-90';
-                break;
-            default:
-                $sReturn .= '-90';
-                break;
-        }
-    }
-    
     if ($aParams['flip'] != '') {
         $sReturn .= ' fa-flip';
         switch ($aParams['flip']) {
@@ -115,32 +144,21 @@ function smarty_function_jxfa( $aParams, &$oSmarty )
                 break;
         }
     }
+    */
     
-    if ($aParams['pull'] == 'on') {
-        if ($aParams['align'] == 'right') {
-            $sAlign = '-right';
-        }
-        else {
-            $sAlign = '-left';
-        }
-        $sReturn .= ' fa-pull' . $sAlign;
-        $sReturn .= ' fa-3x';
-        if ($aParams['border'] == 'on') {
-            $sReturn .= ' fa-border';
-        }
+
+    if ($aParams['order'] == 'reverse') {
+        $sReturn .= $aIcons['inner'] . $aIcons['outer'];
+    }
+    else {
+        $sReturn .= $aIcons['outer'] . $aIcons['inner'];
     }
     
-    $sReturn .= '"';
+    $sReturn .= '</span>';
     
-    if ($aParams['color'] != '') {
-        $sReturn .= ' style="color:' . $aParams['color'] .'"';
-    }
-    
-    $sReturn .= '></i>';
-    
-    if ($aParams['spin'] != '') {
+    /*if ($aParams['spin'] != '') {
         $sReturn .= '<span class="sr-only">Loading...</span>';
-    }
+    }*/
             
     return $sReturn;
 }

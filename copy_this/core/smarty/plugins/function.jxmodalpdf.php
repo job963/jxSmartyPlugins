@@ -18,6 +18,7 @@
  * @link      https://github.com/job963/jxSmarty
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  * @copyright (C) Joachim Barthel 2017
+ * @author    Joachim Barthel <jobarthel@gmail.com>
  */
 
 /**

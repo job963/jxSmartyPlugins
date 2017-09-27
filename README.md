@@ -4,10 +4,27 @@
 ## Installation and Setup
 1. Copy all folders and files under **copy\_this** to the root folder of your shop.
 
+## Features
+The jxSmartyPlugins makes using Bootstrap elements and Awesome Font icons much more easier.
+
+### Boostrap Elements
+  * Alert boxes for success, info, warning and danger messages
+  * Simple modal (popup) dialog
+  * Modal dialog from CMS page
+  * Modal dialog for PDF files
+
+### Font Awesome
+  * Symbol icons
+  * Pulled icons
+  * Animated icons
+  * Stacked icons
+
 
 ## How to Use
 
-### [{ jxalertbox msg="..." type="..." timeout="..." }]
+### **Bootstrap Elements**
+
+#### [{ jxalertbox msg="..." type="..." timeout="..." }]
 
 **Parameters**  
 _msg_ - Message text which will be displayed in the box  
@@ -23,7 +40,8 @@ _timeout_ - Hides the alert box automatically after _timeout_ milliseconds
 ```
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxalertbox.png)
 
-### [{ jxmodaldialog button="..." title="..." body="..." close="true" footerbutton="..." delay="..." timeout="..." }]
+
+#### [{ jxmodaldialog button="..." title="..." body="..." close="true" footerbutton="..." delay="..." timeout="..." }]
 
 **Parameters**  
 _button_ - The text of the action button  
@@ -40,7 +58,8 @@ _timeout_ - Hides the modal automatically after _timeout_ milliseconds
 ```
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxmodaldialog.png)
 
-### [{ jxmodalcontent button="..." ident="..." close="true" footerbutton="..." delay="..." timeout="..." }]
+
+#### [{ jxmodalcontent button="..." ident="..." close="true" footerbutton="..." delay="..." timeout="..." }]
 
 **Parameters**  
 _button_ - The text of the action button  
@@ -56,7 +75,8 @@ _timeout_ - Hides the modal automatically after _timeout_ milliseconds
 ```
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxmodalcontent.png)
 
-### [{ jxmodalpdf button="..." title="..." file="..." close="true" footerbutton="..." }]
+
+#### [{ jxmodalpdf button="..." title="..." file="..." close="true" footerbutton="..." }]
 
 **Parameters**  
 _button_ - The text of the action button  
@@ -70,3 +90,72 @@ _footerbutton_ - Label text of the close button in the footer section
 [{ jxmodalpdf button="Show PDF" file="/out/info.pdf" close="false" footerbutton="Close" }]
 ```
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxmodalpdf.png)
+
+
+### Awesome Icon Font
+
+#### [{ jxfa icon="..." color="..." size="..." width="..." rot="..." flip="..." }]
+
+**Parameters**  
+_icon_ - The name of the icon without the prefix _fa-_, eg. _vcard_ for icon _fa-vcard_   
+_color_ - HTML color code, eg. green or #a0a0a0 (optional)  
+_size_ - Size of the icon, can be _lg_, _2x_, _3x_ or _4x_ (optional)  
+_width_ - Allows to set a fixed width by givin _fw_ (optional)  
+_rot_ - Rotates the icon, can be _90_, _180_ or _270_ (optional)  
+_flip_ - Flips the icon, can be _hor_ or _vert_ (optional)  
+
+**Example**  
+```smarty
+[{ jxfa icon="camera-retro" size="lg" }]
+[{ jxfa icon="camera-retro" size="2x" color="red" }]
+[{ jxfa icon="paper-plane" rot="90" size="lg" }]
+[{ jxfa icon="shield" flip="vert" size="lg" }]
+```
+
+#### [{ jxfa spin=..." color="..." size="..." width="..." }]
+
+**Parameters**  
+_spin_ - The name of the icon without the prefix _fa-_, eg. _cog_ for icon _fa-cog_  
+_color_ - HTML color code, eg. green or #a0a0a0 (optional)  
+_size_ - Size of the icon, can be _lg_, _2x_, _3x_ or _4x_ (optional)  
+_width_ - Allows to set a fixed width by givin _fw_ (optional)  
+
+**Example**  
+```smarty
+[{ jxfa spin="cog" size="3x" color="gray" }]
+[{ jxfa spin="pulse" size="3x" color="blue" }]
+```
+
+####[{ jxfa pull="..." icon="..." color="..." align="..." border="..." }]
+
+**Parameters**  
+_pull_ - Switch the pull mode on, by giving _on_ as value  
+_icon_ - The name of the icon without the prefix _fa-_, eg. _vcard_ for icon _fa-vcard_  
+_color_ - HTML color code, eg. green or #a0a0a0 (optional)  
+_align_ - Specifies the position of the icon, can be _left_ or _right_  
+_border_ - Allows to add a border by setting _on_ as value (optional)  
+
+**Example**  
+```smarty
+[{ jxfa icon="shopping-cart" pull="on" align="left" border="on" color="darkorange" }]
+```
+
+####[{ jxfastack inner="..." outer="..." innercolor="..." outercolor="..." inverse="..." order="..." rot="..." flip=..." }]
+
+**Parameters**  
+_inner_ - The name of the inner icon,  without the prefix _fa-_, eg. _flag_ for icon _fa-flag_  
+_outer_ - The name of the inner icon,  without the prefix _fa-_, eg. _circle_ for icon _fa-circle_  
+_innercolor_ - HTML color code, eg. yellow or #a0a0a0 (optional)  
+_outercolor_ - HTML color code, eg. forestgreen or #a0a0a0 (optional)  
+_inverse_ - Inverse black and white, can be _true_ (optional)  
+_order_ - Cahnges the order (foreground/background) of inner and outer icon (optional)  
+_rot_ - Rotates the inner icon, can be _90_, _180_ or _270_ (optional)  
+_flip_ - Flips the inner icon, can be _hor_ or _vert_ (optional)  
+
+**Example**  
+```smarty
+[{ jxfastack innericon="flag" outericon="circle" innercolor="yellow" outercolor="forestgreen" }]
+[{ jxfastack innericon="unlock-alt" outericon="square" innercolor="blue" outercolor="darkorange" }]
+[{ jxfastack innericon="unlock-alt" outericon="square" inverse="true" rot="90" }]
+[{ jxfastack innericon="unlock-alt" outericon="square" inverse="true" spin="spinner" }]
+```

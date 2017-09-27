@@ -19,7 +19,7 @@ $aModule = array(
     'title'        => 'jxSmartyPlugins - Smarty Extensions',
     'description'  => array(
                         'de' => 'Bootstrap Elemente als Erweiterung der Smarty Funktionalität.',
-                        'en' => 'Bootstrap Elements as Extension of Smarty.'
+                        'en' => 'Bootstrap Elements as Extension of Smarty functions.'
                         ),
     'thumbnail'    => 'jxsmartyplugins.png',
     'version'      => '0.2.0',
