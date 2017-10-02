@@ -9,6 +9,8 @@ $aLang = array(
 	'SHOP_MODULE_blJxSmartyLoadBsStylesheet'    => 'Bootstrap Stylesheet',
 	'SHOP_MODULE_blJxSmartyLoadBsTheme'         => 'Bootstrap Theme',
 	'SHOP_MODULE_blJxSmartyLoadBsJavascript'    => 'Bootstrap Javascript',
+	'SHOP_MODULE_GROUP_JXSMARTY_REMARKS'        => 'Kommentare',
+	'SHOP_MODULE_sJxSmartyDisplayRegex'         => 'Regex-Bedingung um Kommtentare anzuzeigen (leer = an)',
 	'SHOP_MODULE_GROUP_JXSMARTY_PPINCLUDE'      => 'jQuery/prettyPhoto Dateien explizit laden',
 	'SHOP_MODULE_blJxSmartyLoadJQuery'          => 'jQuery Javascript',
 	'SHOP_MODULE_blJxSmartyLoadPpStylesheet'    => 'prettyPhoto Stylesheet',

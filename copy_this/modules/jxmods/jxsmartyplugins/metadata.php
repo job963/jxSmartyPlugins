@@ -54,6 +54,12 @@ $aModule = array(
                             'value' => 'false'
                             ),
                         array(
+                            'group' => 'JXSMARTY_REMARKS', 
+                            'name'  => 'sJxSmartyDisplayRegex', 
+                            'type'  => 'string', 
+                            'value' => ''
+                            ),
+                        /*array(
                             'group' => 'JXSMARTY_PPINCLUDE', 
                             'name'  => 'blJxSmartyLoadJQuery', 
                             'type'  => 'bool', 
@@ -70,7 +76,7 @@ $aModule = array(
                             'name'  => 'blJxSmartyLoadPpJavascript', 
                             'type'  => 'bool', 
                             'value' => 'false'
-                            ),
+                            ),*/
                         )
     );
 
