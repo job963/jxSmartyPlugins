@@ -25,7 +25,7 @@
  * Smarty Alert function
  * -------------------------------------------------------------
  * Purpose: displays an alert box
- * add [{ jxrem remark="..." display="none" }] where you want to display an remark/comment
+ * add [{ jxrem remark="..." display="never|conditional|always" style="block" }] where you want to display an  html comment
  * -------------------------------------------------------------
  *
  * @param array  $aParams  parameters to process
@@ -44,11 +44,19 @@ function smarty_function_jxrem( $aParams, &$oSmarty )
     }
     $sDisplayRegex = '/' . $sDisplayRegex . '/';
     
-    if (($aParams['display'] != 'none') and (preg_match($sDisplayRegex,$_SERVER['HTTP_HOST']))) {
+    if ((($aParams['display'] != 'never') and (preg_match($sDisplayRegex,$_SERVER['HTTP_HOST']))) or ($aParams['display'] != 'always')) {
         if ($aParams['remark'] != '') {
-            $sReturn .= '<!--';
-            $sReturn .= $aParams['remark'];
-            $sReturn .= '-->';
+            $sReturn .= '<!-- ';
+            if ($aParams['style'] == 'block') {
+                $sReturn .= "\n";
+            }
+            
+            $sReturn .= str_replace('\n', " \n", $aParams['remark']);
+            
+            if ($aParams['style'] == 'block') {
+                $sReturn .= "\n";
+            }
+            $sReturn .= ' -->';
         }
     }
         

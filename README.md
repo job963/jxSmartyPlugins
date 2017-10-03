@@ -19,6 +19,10 @@ The jxSmartyPlugins makes using Bootstrap elements and Awesome Font icons much m
   * Animated icons
   * Stacked icons
 
+### Conditional Comments
+  * HTML comments
+  * Conditions (eg. server) for displaying
+
 
 ## How to Use
 
@@ -47,7 +51,7 @@ _timeout_ - Hides the alert box automatically after _timeout_ milliseconds
 _button_ - The text of the action button  
 _title_ - Title text of the modal box (optional)  
 _body_ - Message text which will be displayed in the modal box  
-_close_ - If set to true a close "x" will displayed in the upper right corner  
+_close_ - If set to _true_ a close "x" will displayed in the upper right corner  
 _footerbutton_ - Label text of the close button in the footer section  
 _delay_ - Shows the modal automatically after _delay_ milliseconds. Do not combine with _button_  
 _timeout_ - Hides the modal automatically after _timeout_ milliseconds
@@ -64,7 +68,7 @@ _timeout_ - Hides the modal automatically after _timeout_ milliseconds
 **Parameters**  
 _button_ - The text of the action button  
 _body_ - Message text which will be displayed in the modal box  
-_close_ - If set to true a close "x" will displayed in the upper right corner  
+_close_ - If set to _true_ a close "x" will displayed in the upper right corner  
 _footerbutton_ - Label text of the close button in the footer section  
 _delay_ - Shows the modal automatically after _delay_ milliseconds. Do not combine with _button_  
 _timeout_ - Hides the modal automatically after _timeout_ milliseconds
@@ -82,7 +86,7 @@ _timeout_ - Hides the modal automatically after _timeout_ milliseconds
 _button_ - The text of the action button  
 _title_ - Title text of the modal box (optional)  
 _file_ - The name of the pdf file which will be displayed in the modal box  
-_close_ - If set to true a close "x" will displayed in the upper right corner  
+_close_ - If set to _true_ a close "x" will displayed in the upper right corner  
 _footerbutton_ - Label text of the close button in the footer section 
 
 **Example**  
@@ -111,6 +115,8 @@ _flip_ - Flips the icon, can be _hor_ or _vert_ (optional)
 [{ jxfa icon="paper-plane" rot="90" size="lg" }]
 [{ jxfa icon="shield" flip="vert" size="lg" }]
 ```
+![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfa.png)
+
 
 #### [{ jxfa spin=..." color="..." size="..." width="..." }]
 
@@ -125,6 +131,8 @@ _width_ - Allows to set a fixed width by givin _fw_ (optional)
 [{ jxfa spin="cog" size="3x" color="gray" }]
 [{ jxfa spin="pulse" size="3x" color="blue" }]
 ```
+![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfaspin.png)
+
 
 ####[{ jxfa pull="..." icon="..." color="..." align="..." border="..." }]
 
@@ -139,6 +147,8 @@ _border_ - Allows to add a border by setting _on_ as value (optional)
 ```smarty
 [{ jxfa icon="shopping-cart" pull="on" align="left" border="on" color="darkorange" }]
 ```
+![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfapull.png)
+
 
 ####[{ jxfastack inner="..." outer="..." innercolor="..." outercolor="..." inverse="..." order="..." rot="..." flip=..." }]
 
@@ -148,7 +158,7 @@ _outer_ - The name of the inner icon,  without the prefix _fa-_, eg. _circle_ fo
 _innercolor_ - HTML color code, eg. yellow or #a0a0a0 (optional)  
 _outercolor_ - HTML color code, eg. forestgreen or #a0a0a0 (optional)  
 _inverse_ - Inverse black and white, can be _true_ (optional)  
-_order_ - Cahnges the order (foreground/background) of inner and outer icon (optional)  
+_order_ - Changes the order (foreground/background) of inner and outer icon (optional)  
 _rot_ - Rotates the inner icon, can be _90_, _180_ or _270_ (optional)  
 _flip_ - Flips the inner icon, can be _hor_ or _vert_ (optional)  
 
@@ -158,4 +168,28 @@ _flip_ - Flips the inner icon, can be _hor_ or _vert_ (optional)
 [{ jxfastack innericon="unlock-alt" outericon="square" innercolor="blue" outercolor="darkorange" }]
 [{ jxfastack innericon="unlock-alt" outericon="square" inverse="true" rot="90" }]
 [{ jxfastack innericon="unlock-alt" outericon="square" inverse="true" spin="spinner" }]
+```
+![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfastack.png)
+
+
+####[{ jxrem remark="..." display="none|regex|always" style="block" }]
+
+**Parameters**  
+_remark_ - The comment text. Use _\n_ to get a line break  
+_display_ - Allows to display the comment _never_, _conditional_ or _always_ (optional)  
+style_ - If set to _block_ the begin and the end of the comment are in new line   
+
+**Example**  
+```smarty
+[{ jxrem remark="This is a HTML comment\nCreated by jxSmartyPlugin" }]
+[{ jxrem remark="This is a block formatted HTML comment" }]
+```
+  
+```html
+<!-- This is a HTML comment
+Created by jxSmartyPlugin -->
+
+<!-- 
+This is a block formatted HTML comment
+-->
 ```

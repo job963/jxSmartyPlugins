@@ -18,11 +18,17 @@ $aModule = array(
     'id'           => 'jxSmartyPlugins',
     'title'        => 'jxSmartyPlugins - Smarty Extensions',
     'description'  => array(
-                        'de' => 'Bootstrap Elemente als Erweiterung der Smarty Funktionalität.',
-                        'en' => 'Bootstrap Elements as Extension of Smarty functions.'
+                        'de' => 'Erweiterung der Smarty Funktionalität.<ul>'
+                                . '<li>Bootstrap Elemente'
+                                . '<li>Font Awesome Icons'
+                                . '<li>HTML Kommentare</ul>',
+                        'en' => 'Bootstrap Elements as Extension of Smarty functions.<ul>'
+                                . '<li>Bootstrap Elements'
+                                . '<li>Font Awesome Icons'
+                                . '<li>HTML Comments</ul>'
                         ),
     'thumbnail'    => 'jxsmartyplugins.png',
-    'version'      => '0.2.0',
+    'version'      => '0.3.0',
     'author'       => 'Joachim Barthel',
     'url'          => 'https://github.com/job963/jxSmartyPlugins',
     'email'        => 'jobarthel@gmail.com',
@@ -56,7 +62,7 @@ $aModule = array(
                         array(
                             'group' => 'JXSMARTY_REMARKS', 
                             'name'  => 'sJxSmartyDisplayRegex', 
-                            'type'  => 'string', 
+                            'type'  => 'str', 
                             'value' => ''
                             ),
                         /*array(
