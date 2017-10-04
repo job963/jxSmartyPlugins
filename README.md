@@ -134,7 +134,7 @@ _width_ - Allows to set a fixed width by givin _fw_ (optional)
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfaspin.png)
 
 
-####[{ jxfa pull="..." icon="..." color="..." align="..." border="..." }]
+#### [{ jxfa pull="..." icon="..." color="..." align="..." border="..." }]
 
 **Parameters**  
 _pull_ - Switch the pull mode on, by giving _on_ as value  
@@ -150,7 +150,7 @@ _border_ - Allows to add a border by setting _on_ as value (optional)
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfapull.png)
 
 
-####[{ jxfastack inner="..." outer="..." innercolor="..." outercolor="..." inverse="..." order="..." rot="..." flip=..." }]
+#### [{ jxfastack inner="..." outer="..." innercolor="..." outercolor="..." inverse="..." order="..." rot="..." flip=..." }]
 
 **Parameters**  
 _inner_ - The name of the inner icon,  without the prefix _fa-_, eg. _flag_ for icon _fa-flag_  
@@ -172,7 +172,7 @@ _flip_ - Flips the inner icon, can be _hor_ or _vert_ (optional)
 ![](https://github.com/job963/jxSmartyPlugins/raw/master/docu/jxfastack.png)
 
 
-####[{ jxrem remark="..." display="none|regex|always" style="block" }]
+#### [{ jxrem remark="..." display="none|regex|always" style="block" }]
 
 **Parameters**  
 _remark_ - The comment text. Use _\n_ to get a line break  
