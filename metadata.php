@@ -3,14 +3,14 @@
 /**
  * Metadata version
  */
-$sMetadataVersion = '1.1';
+$sMetadataVersion = '2.0';
  
 /**
  * Module information
  * 
  * @link      https://github.com/job963/jxSmartyPlugins
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- * @copyright (C) Joachim Barthel 2017
+ * @copyright (C) Joachim Barthel 2017-2018
  * @author    Joachim Barthel <jobarthel@gmail.com>
  * 
  */
@@ -28,7 +28,7 @@ $aModule = array(
                                 . '<li>HTML Comments</ul>'
                         ),
     'thumbnail'    => 'jxsmartyplugins.png',
-    'version'      => '0.3.0',
+    'version'      => '0.4.0',
     'author'       => 'Joachim Barthel',
     'url'          => 'https://github.com/job963/jxSmartyPlugins',
     'email'        => 'jobarthel@gmail.com',
